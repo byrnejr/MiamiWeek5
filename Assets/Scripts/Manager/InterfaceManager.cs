@@ -27,11 +27,7 @@ public class InterfaceManager : MonoBehaviour
         playerInputManager.JoinPlayer(0, "Keyboard&Mouse");
         joinPlayerOne.GetComponentInChildren<Text>().text = "Leave Player One";
         joinPlayerOne.onClick.RemoveListener(JoinPlayerOne);
-        joinPlayerOne.onClick.AddListener(() => LeavePlayerOne());
-    }
-    private void LeavePlayerOne()
-    {
-        playerInputManager.LeavePlayer(0);
+        joinPlayerOne.onClick.AddListener(() => LeavePlayer(0));
     }
 
     private void JoinPlayerTwo()
@@ -39,10 +35,10 @@ public class InterfaceManager : MonoBehaviour
         playerInputManager.JoinPlayer(1, "PlayerTwo");
         joinPlayerTwo.GetComponentInChildren<Text>().text = "Leave Player Two";
         joinPlayerTwo.onClick.RemoveListener(JoinPlayerTwo);
-        joinPlayerTwo.onClick.AddListener(() => LeavePlayerTwo());
+        joinPlayerTwo.onClick.AddListener(() => LeavePlayer(1));
     }
-    private void LeavePlayerTwo()
+    private void LeavePlayer(int playerIndex)
     {
-        playerInputManager.LeavePlayer(1);
+        playerInputManager.LeavePlayer(playerIndex);
     }
 }
