@@ -12,6 +12,7 @@ public class SplitKeyboardPlayerInputManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -35,5 +36,8 @@ public class SplitKeyboardPlayerInputManager : MonoBehaviour
     public void LeavePlayer(int playerIndex)
     {
         var playerInput = existingPlayerInputs[playerIndex];
+        Destroy(playerInput.gameObject);
+        existingPlayerInputs.Remove(playerIndex);
+        SendMessage("OnPlayerLeft", playerInput);
     }
 }

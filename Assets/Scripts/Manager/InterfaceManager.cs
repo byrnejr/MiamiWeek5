@@ -10,7 +10,8 @@ public class InterfaceManager : MonoBehaviour
     [SerializeField]
     private Button joinPlayerOne;
 
-    //TODO: Add PlayerTwoButton reference
+    [SerializeField]
+    private Button joinPlayerTwo;
 
     [SerializeField]
     private SplitKeyboardPlayerInputManager playerInputManager;
@@ -18,17 +19,30 @@ public class InterfaceManager : MonoBehaviour
     void Start()
     {
         joinPlayerOne.onClick.AddListener(() => JoinPlayerOne());
-        //TODO Listen for player two click event
+        joinPlayerTwo.onClick.AddListener(() => JoinPlayerTwo());
     }
 
     private void JoinPlayerOne()
     {
         playerInputManager.JoinPlayer(0, "Keyboard&Mouse");
-        //TODO flip text to say "Leave Player One"
-        //TODO on click after player has joined, remove player
+        joinPlayerOne.GetComponentInChildren<Text>().text = "Leave Player One";
+        joinPlayerOne.onClick.RemoveListener(JoinPlayerOne);
+        joinPlayerOne.onClick.AddListener(() => LeavePlayerOne());
+    }
+    private void LeavePlayerOne()
+    {
+        playerInputManager.LeavePlayer(0);
     }
 
-    //TODO Invoke JoinPlayer passing a playerIndex value and targeting a control scheme
-    //TODO flip text after player has joined to say "Leave Player Two"
-    //TODO on click after player has joined, remove player
+    private void JoinPlayerTwo()
+    {
+        playerInputManager.JoinPlayer(1, "PlayerTwo");
+        joinPlayerTwo.GetComponentInChildren<Text>().text = "Leave Player Two";
+        joinPlayerTwo.onClick.RemoveListener(JoinPlayerTwo);
+        joinPlayerTwo.onClick.AddListener(() => LeavePlayerTwo());
+    }
+    private void LeavePlayerTwo()
+    {
+        playerInputManager.LeavePlayer(1);
+    }
 }
